@@ -10,3 +10,25 @@ WebSocket frame: ~10–50 bytes per update → 600 bytes/min/user. With 100K use
 If updates are frequent (sub-second to few seconds) → use WebSockets (or SSE if one-way).
 
 If updates are rare (every few mins, on demand) → simple HTTP API is fine.
+
+
+SSE :::::::
+
+
+SSE (Server-Sent Events) keeps a persistent HTTP connection open from the client → server, and the server can stream events continuously over it.
+
+The client makes a single GET /stream request.
+
+The server responds with Content-Type: text/event-stream and never closes the connection (unless explicitly needed).
+
+Server keeps writing events like:
+
+data: {"lat":12.9,"lon":77.6}
+data: {"lat":12.91,"lon":77.61}
+
+
+Connection stays open until:
+
+Client closes it, or
+
+Network/timeout happens.
