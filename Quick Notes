@@ -1,0 +1,12 @@
+⚡ Quick Numbers
+
+HTTP POST (polling every 1s): ~500–1000 bytes/request → 60 KB per user per minute. With 100K users → ~6 GB/min traffic.
+
+WebSocket frame: ~10–50 bytes per update → 600 bytes/min/user. With 100K users → ~60 MB/min traffic.
+👉 That’s ~100x more efficient.
+
+✅ Rule of Thumb
+
+If updates are frequent (sub-second to few seconds) → use WebSockets (or SSE if one-way).
+
+If updates are rare (every few mins, on demand) → simple HTTP API is fine.
